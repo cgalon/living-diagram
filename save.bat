@@ -1,0 +1,1 @@
+copy /y target\living-diagram-*.zip D:\\Commun\\Documents\\Travail
