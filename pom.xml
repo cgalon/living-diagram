@@ -95,27 +95,5 @@
       </plugins>
     </pluginManagement>
 
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.3.0</version>
-        <configuration>
-          <descriptors>
-            <descriptor>src/assembly/sauvegarde.xml</descriptor>
-          </descriptors>
-          <finalName>living-diagram-${project.version}</finalName>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-
   </build>
 </project>
