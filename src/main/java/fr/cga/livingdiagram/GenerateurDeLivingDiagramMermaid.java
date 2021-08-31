@@ -8,16 +8,16 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GenerateurDeDiagrammes {
+public class GenerateurDeLivingDiagramMermaid {
 
     private final Collection<UneClasse> listeDesClassesTrouvees;
     private boolean avecLesPackages = false;
 
-    public GenerateurDeDiagrammes(Collection<UneClasse> listeDesClassesTrouvees) {
+    public GenerateurDeLivingDiagramMermaid(Collection<UneClasse> listeDesClassesTrouvees) {
         this.listeDesClassesTrouvees = listeDesClassesTrouvees;
     }
 
-    public GenerateurDeDiagrammes(Collection<UneClasse> listeDesClassesTrouvees, boolean avecLesPackages) {
+    public GenerateurDeLivingDiagramMermaid(Collection<UneClasse> listeDesClassesTrouvees, boolean avecLesPackages) {
         this.listeDesClassesTrouvees = listeDesClassesTrouvees;
         this.avecLesPackages = avecLesPackages;
     }
