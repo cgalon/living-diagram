@@ -10,10 +10,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String(
-                "E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
-        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
+        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
         GenerateurDeDiagrammes generateur = new GenerateurDeDiagrammes(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n";
 
@@ -25,10 +22,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String(
-                "E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
-        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
+        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
         GenerateurDeDiagrammes generateur = new GenerateurDeDiagrammes(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n" + "Revue\n";
 
@@ -40,9 +34,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
-        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
+        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
         GenerateurDeDiagrammes generateur = new GenerateurDeDiagrammes(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + "ReferentielDeRevues\n" + "end\n" + 
@@ -57,9 +49,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
-        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
+        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
         GenerateurDeDiagrammes generateur = new GenerateurDeDiagrammes(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + 
@@ -91,6 +81,12 @@ public class GenerateurDeLivingDiagramMermaidTest {
         String diagramme = generateur.genereUnLivingDiagramEnMermaid();
 
         assertEquals(diagrammeAttendu, diagramme);
+    }
+
+    private Collection<UneClasse> fabriqueLaCollectionDesClassesSources(String cheminDuDossierDeSourcesAScanner) {
+        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
+        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
+        return listeDesClassesTrouvees;
     }
 
 }
