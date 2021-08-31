@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GenerateurDeLivingDiagramMermaid {
+public class GenerateurDeLivingDiagramMermaid implements GenerateurDeDiagramme {
 
     private final Collection<UneClasse> listeDesClassesTrouvees;
     private boolean avecLesPackages = false;
@@ -22,7 +22,7 @@ public class GenerateurDeLivingDiagramMermaid {
         this.avecLesPackages = avecLesPackages;
     }
 
-    public String genereUnLivingDiagramEnMermaid() {
+    public String genereLeDiagrammePourLaListeDesClasses() {
 
         StringBuffer diagramme = new StringBuffer("graph LR\n");
         List<UneClasse> listeTrieeParPackage = listeDesClassesTrouvees.stream()

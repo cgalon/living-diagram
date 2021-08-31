@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 
 public class GenerateurDeLivingDiagramMermaidTest {
 
+    private AssistantDePreparationDesTests assistant = new AssistantDePreparationDesTests();
+
     @Test
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n";
 
-        String diagramme = generateur.genereUnLivingDiagramEnMermaid();
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
         assertEquals(diagrammeAttendu, diagramme);
 
@@ -22,11 +24,11 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n" + "Revue\n";
 
-        String diagramme = generateur.genereUnLivingDiagramEnMermaid();
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
         assertEquals(diagrammeAttendu, diagramme);
 
@@ -34,7 +36,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + "ReferentielDeRevues\n" + "end\n" + 
@@ -42,14 +44,14 @@ public class GenerateurDeLivingDiagramMermaidTest {
         "subgraph infrastructure\n" + "EntrepotDeNumeros\n" + "EntrepotDeRevues\n" + "EpisodeDAO\n" + "NumeroDAO\n" + "RevueDAO\n" + "ServiceDeRevue\n" + "end\n" + 
         "subgraph ressource\n" + "ReferentielDeRevuesController\n" + "end\n";
 
-        String diagramme = generateur.genereUnLivingDiagramEnMermaid();
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
         assertEquals(diagrammeAttendu, diagramme);
     }
 
     @Test
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + 
@@ -78,15 +80,9 @@ public class GenerateurDeLivingDiagramMermaidTest {
         "ReferentielDeRevuesController --> ReferentielDeRevues\n" + 
         "end\n";
 
-        String diagramme = generateur.genereUnLivingDiagramEnMermaid();
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
         assertEquals(diagrammeAttendu, diagramme);
-    }
-
-    private Collection<UneClasse> fabriqueLaCollectionDesClassesSources(String cheminDuDossierDeSourcesAScanner) {
-        ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
-        return listeDesClassesTrouvees;
     }
 
 }
