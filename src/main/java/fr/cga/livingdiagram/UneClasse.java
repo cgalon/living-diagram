@@ -21,4 +21,9 @@ public class UneClasse {
         return nomDuPackage;
     }
 
+    // Uniquement utilisée pour la comparaison dans un stream
+    public String getNomDeLaClasse() {
+        return nomDeLaClasse;
+    }
+
 }

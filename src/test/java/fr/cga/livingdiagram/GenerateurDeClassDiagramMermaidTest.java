@@ -14,7 +14,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     @Disabled
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_01_classe_simple");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
@@ -26,7 +26,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     @Disabled
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_02_plusieurs_classes_simples");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
@@ -38,7 +38,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     @Disabled
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_04_affichage_des_packages");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
@@ -50,7 +50,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     @Disabled
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_05_dependances_intra_composant");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 

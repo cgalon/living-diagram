@@ -7,6 +7,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,7 +19,7 @@ public class ExtracteurDeDonneesTest {
     
     @Test
     public void doitRecupererLeContenuDuneClasseVide() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
+        String cheminDuDossierDeSourcesAScanner = AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("_01_classe_simple");
         ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
 
         Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
@@ -28,7 +31,7 @@ public class ExtracteurDeDonneesTest {
 
     @Test
     public void doitRecupererLeContenuDeDeuxClassesVides() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
+        String cheminDuDossierDeSourcesAScanner = AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("_02_plusieurs_classes_simples");
         ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
 
         Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
@@ -42,7 +45,7 @@ public class ExtracteurDeDonneesTest {
 
     @Test
     public void doitRecupererLeContenuDeTroisClassesCompletes() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_03_une_classe_complete");
+        String cheminDuDossierDeSourcesAScanner = AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("_03_une_classe_complete");
         ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
 
         Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
@@ -70,17 +73,22 @@ public class ExtracteurDeDonneesTest {
 
     @Test
     public void doitRecupererLeContenuDeTroisDomainesComplets() throws Exception {
-        String cheminDuDossierDeSourcesAScanner = new String("E:\\dev\\living-diagram\\src\\test\\resources\\_10_trois_domaines_complets");
+        String cheminDuDossierDeSourcesAScanner = AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("_10_trois_domaines_complets");
         ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        byte[] contenuDuFichierDeReference = Files.readAllBytes(FileSystems.getDefault().getPath("E:\\dev\\living-diagram\\src\\test\\resources\\resultat-test-extracteur-donnees.json"));
+        byte[] contenuDuFichierDeReference =
+                Files.readAllBytes(FileSystems.getDefault().getPath(AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("resultat-test-extracteur-donnees.json")));
 
         Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
-        UneClasse[] resultat = listeDesClassesTrouvees.toArray(new UneClasse[0]);
+        List<UneClasse> listeTrieeParPackage = listeDesClassesTrouvees.stream()
+                .sorted(Comparator.comparing(UneClasse::getNomDuPackage).thenComparing(UneClasse::getNomDeLaClasse))
+                .collect(Collectors.toList());
+        UneClasse[] resultat = listeTrieeParPackage.toArray(new UneClasse[0]);
 
         assertEquals(26, resultat.length);
         ObjectMapper mapper = new ObjectMapper();
-        byte[] listeSerialisee = mapper.writeValueAsString(listeDesClassesTrouvees).getBytes();
-        assertTrue(Arrays.equals(contenuDuFichierDeReference, listeSerialisee));
+        byte[] listeSerialisee = mapper.writeValueAsString(listeTrieeParPackage).getBytes();
+
+        assertEquals(mapper.readTree(contenuDuFichierDeReference), mapper.readTree(listeSerialisee));
     }
 
 }

@@ -12,7 +12,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_01_classe_simple");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_01_classe_simple");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n";
 
@@ -24,7 +24,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_02_plusieurs_classes_simples");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_02_plusieurs_classes_simples");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "graph LR\n" + "Episode\n" + "Revue\n";
 
@@ -36,7 +36,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_04_affichage_des_packages");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_04_affichage_des_packages");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + "ReferentielDeRevues\n" + "end\n" + 
@@ -51,7 +51,7 @@ public class GenerateurDeLivingDiagramMermaidTest {
 
     @Test
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("E:\\dev\\living-diagram\\src\\test\\resources\\_05_dependances_intra_composant");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_05_dependances_intra_composant");
         GenerateurDeLivingDiagramMermaid generateur = new GenerateurDeLivingDiagramMermaid(listeDesClassesTrouvees, true);
         String diagrammeAttendu = "graph LR\n" + 
         "subgraph api\n" + 
