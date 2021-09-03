@@ -24,10 +24,11 @@ public class GenerateurDeLivingDiagramMermaid implements GenerateurDeDiagramme {
 
     public String genereLeDiagrammePourLaListeDesClasses() {
 
-        StringBuffer diagramme = new StringBuffer("graph LR\n");
         List<UneClasse> listeTrieeParPackage = listeDesClassesTrouvees.stream()
             .sorted(Comparator.comparing(UneClasse::getNomDuPackage).thenComparing(UneClasse::getNomDeLaClasse))
             .collect(Collectors.toList());
+
+        StringBuffer diagramme = new StringBuffer("graph LR\n");
 
         boolean premiereClasseTraitee = true;
         String packagePrecedent = null;

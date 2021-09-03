@@ -12,11 +12,11 @@ public class GenerateurDeClassDiagramMermaidTest {
     private AssistantDePreparationDesTests assistant = new AssistantDePreparationDesTests();
 
     @Test
-    @Disabled
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_01_classe_simple");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
-        String diagrammeAttendu = "";
+        String diagrammeAttendu = "classDiagram\n" +
+                "class Episode\n";
 
         String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
@@ -24,11 +24,27 @@ public class GenerateurDeClassDiagramMermaidTest {
     }
 
     @Test
-    @Disabled
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_02_plusieurs_classes_simples");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
-        String diagrammeAttendu = "";
+        String diagrammeAttendu = "classDiagram\n" +
+                "class Episode\n" +
+                "class Revue\n";
+
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
+
+        assertEquals(diagrammeAttendu, diagramme);
+    }
+
+    @Test
+    public void doitGenererLesAttributsPourUneClasse() throws Exception {
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_06_une_classe_avec_des_attributs");
+        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        String diagrammeAttendu = "classDiagram\n" +
+                "class Episode\n" +
+                "Episode : java.lang.String heros\n" +
+                "Episode : java.lang.String titre\n" +
+                "Episode : java.lang.String dessinateur\n";
 
         String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
 
