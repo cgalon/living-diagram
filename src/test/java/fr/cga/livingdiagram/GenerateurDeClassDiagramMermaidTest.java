@@ -52,6 +52,24 @@ public class GenerateurDeClassDiagramMermaidTest {
     }
 
     @Test
+    public void doitGenererLesAttributsEtLesMethodesPourUneClasse() throws Exception {
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_03_une_classe_complete");
+        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        String diagrammeAttendu = "classDiagram\n" +
+                "class Episode\n" +
+                "Episode : java.lang.String heros\n" +
+                "Episode : java.lang.String titre\n" +
+                "Episode : java.lang.String dessinateur\n" +
+                "Episode : recupereLeHeros()\n" +
+                "Episode : equals()\n" +
+                "Episode : hashCode()\n";
+
+        String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
+
+        assertEquals(diagrammeAttendu, diagramme);
+    }
+
+    @Test
     @Disabled
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_04_affichage_des_packages");
