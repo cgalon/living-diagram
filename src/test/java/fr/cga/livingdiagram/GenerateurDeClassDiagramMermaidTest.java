@@ -84,7 +84,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     @Disabled
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
-        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_05_dependances_intra_composant");
+        Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_05_dependances_inter_packages");
         GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
