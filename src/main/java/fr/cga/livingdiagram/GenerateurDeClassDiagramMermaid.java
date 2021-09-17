@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GenerateurDeClassDiagramMermaid implements GenerateurDeDiagramme {
+public class GenerateurDeClassDiagramMermaid extends GenerateurDeDiagrammeAbstrait {
 
     private final Collection<UneClasse> listeDesClassesTrouvees;
 

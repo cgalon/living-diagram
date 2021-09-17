@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GenerateurDeLivingDiagramMermaid implements GenerateurDeDiagramme {
+public class GenerateurDeLivingDiagramMermaid extends GenerateurDeDiagrammeAbstrait {
 
     private final Collection<UneClasse> listeDesClassesTrouvees;
     private boolean avecLesPackages = false;
@@ -65,53 +65,6 @@ public class GenerateurDeLivingDiagramMermaid implements GenerateurDeDiagramme {
         else {
             diagramme.append(classeEnCours.nomDeLaClasse).append(" --> ").append(calculeLeNomCourt(attribut.type)).append("\n");
         }
-    }
-
-    private boolean estUnAttributAPrendreEnCompte(UnAttribut attribut) {
-        boolean estAPrendreEnCompte = true;
-        if (estUnTypeJavaDeBase(attribut)) {
-           estAPrendreEnCompte = false;
-        }
-        else if (estUnTypeJavaSansGenerique(attribut)) {
-            estAPrendreEnCompte = false;
-        }
-        else if (estUnTypeGeneriqueDeTypeJava(attribut)) {
-            estAPrendreEnCompte = false;
-        }
-        return estAPrendreEnCompte;
-    }
-
-    private boolean estUnTypeGeneriqueDeTypeJava(UnAttribut attribut) {
-        boolean estUnTypeGeneriqueDeTypeJava = false;
-        if (attribut.type.contains("<")) {
-            String classGenerique = StringUtils.substringBetween(attribut.type, "<", ">");
-            if (classGenerique.startsWith("java")) {
-                estUnTypeGeneriqueDeTypeJava = true;
-            }
-        }
-        return estUnTypeGeneriqueDeTypeJava;
-    }
-
-    private boolean estUnTypeJavaSansGenerique(UnAttribut attribut) {
-        boolean estDeTypeJavaSansGenerique = false;
-        if ((attribut.type.startsWith("java")) && !(attribut.type.contains("<"))) {
-            estDeTypeJavaSansGenerique = true;
-        }
-        return estDeTypeJavaSansGenerique;
-    }
-
-    private boolean estUnTypeJavaDeBase(UnAttribut attribut) {
-        List<String> listeDesTypesJavaDeBase = new ArrayList<String>();
-        listeDesTypesJavaDeBase.add("boolean");
-        listeDesTypesJavaDeBase.add("byte");
-        listeDesTypesJavaDeBase.add("char");
-        listeDesTypesJavaDeBase.add("double");
-        listeDesTypesJavaDeBase.add("float");
-        listeDesTypesJavaDeBase.add("int");
-        listeDesTypesJavaDeBase.add("long");
-        listeDesTypesJavaDeBase.add("short");
-
-        return listeDesTypesJavaDeBase.contains(attribut.type);
     }
 
     private String calculeLeNomCourt(String nomLong) {
