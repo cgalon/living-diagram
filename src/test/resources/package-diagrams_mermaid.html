@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC
+				"-//W3C//DTD XHTML 1.0 Transitional//EN"
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<body>
+<h1>Diagrammes Flowchart produits avec Mermaid</h1>
+<h2>_01_classe_simple</h2>
+<div class="mermaid">
+	graph LR
+	Episode
+</div>
+
+<h2>_02_plusieurs_classes_simples</h2>
+<div class="mermaid">
+	graph LR
+	Episode
+	Revue
+</div>
+
+<h2>_04_affichage_des_packages</h2>
+<div class="mermaid">
+	graph TB
+	subgraph api
+	ReferentielDerevues
+	end
+	subgraph domaine
+	Episode
+	Numero
+	Revue 
+	end
+	subgraph infrastructure
+	EntrepotDeNumeros
+	EntrepotDeRevues
+	EpisodeDAO
+	NumeroDAO
+	RevueDAO
+	ServiceDeRevue 
+	end
+	subgraph ressource
+	ReferentielDeRevuesController
+	end
+</div>
+
+<h2>_05_dependances_intra_composant</h2>
+<div class="mermaid">
+	graph TB
+	subgraph api
+	ReferentielDeRevues
+	ReferentielDeRevues --> ServiceDeRevue
+	end
+	subgraph domaine
+	Episode
+	Numero
+	Numero -- liste --> Episode
+	Revue 
+	end
+	subgraph infrastructure
+	EntrepotDeNumeros
+	EntrepotDeRevues
+	EpisodeDAO
+	NumeroDAO
+	NumeroDAO -- liste --> EpisodeDAO
+	RevueDAO
+	ServiceDeRevue
+	ServiceDeRevue --> EntrepotDeRevues
+	ServiceDeRevue --> EntrepotDeNumeros
+	end
+	subgraph ressource
+	ReferentielDeRevuesController
+	ReferentielDeRevuesController --> ReferentielDeRevues
+	end
+</div>
+
+<h2>_10_trois_domaines_complets</h2>
+<div class="mermaid">
+
+</div>
+
+<script src="http://cdn.jsdelivr.net/npm/mermaid@8.5.0/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad: true});</script>
+</body>
+</html>
