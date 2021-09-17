@@ -1,6 +1,7 @@
 # Description
 
 Projet de création de diagrammes à partir de code source :
-- Dépendances entre classes
-- Dépendances entre packages
-- Diagramme de classes
+- Dépendances entre classes (living-diagram)
+- Dépendances entre packages (package-diagram)
+- Diagramme de classes (class-diagram)
+- 
