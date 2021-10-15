@@ -1,6 +1,7 @@
 package fr.cga.livingdiagram;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -67,6 +68,9 @@ public class ExtracteurDeDonneesTest {
         assertEquals("equals", listeDesMethodes[1].nom);
         UneAnnotation[] listeDesAnnotationDeEquals = listeDesMethodes[1].listeDesAnnotations.toArray(new UneAnnotation[0]);
         assertEquals("Override", listeDesAnnotationDeEquals[0].nom);
+
+        assertTrue(resultat[0].listeDesImports.contains("java.beans.BeanProperty"));
+        assertTrue(resultat[0].listeDesImports.contains("java.util.Objects"));
     }
 
     @Test

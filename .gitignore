@@ -5,5 +5,4 @@ target
 # fichiers spécifique au ms001
 src/test/resources/_11_ms001_offres
 src/test/java/fr/cga/livingdiagram/GenerateurDePackageDiagramPourDA087Test.java
-ms001.html
-ms001_diag.txt
+ms00*

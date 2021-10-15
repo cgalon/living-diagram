@@ -36,6 +36,7 @@ public class ExtracteurDeDonnees {
         UneClasse uneClasse = new UneClasse(classeScannee.getPackageName(), classeScannee.getName());
         classeScannee.getFields().stream().forEach(attribut -> uneClasse.listeDesAttributs.add(analyseUnAttribut(attribut)));
         classeScannee.getMethods().stream().forEach(methode -> uneClasse.listeDesMethodes.add(analyseUneMethode(methode)));
+        classeScannee.getSource().getImports().stream().forEach(unImport -> uneClasse.listeDesImports.add(unImport));
 
         return uneClasse;
     }

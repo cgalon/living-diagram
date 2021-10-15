@@ -18,19 +18,37 @@ public abstract class GenerateurDeDiagrammeAbstrait implements GenerateurDeDiagr
         return estAPrendreEnCompte;
     }
 
-    protected boolean estUnTypeExterne(UnAttribut attribut) {
-        boolean estUnTypeExterne = false;
-        String typeDeLAttribut = attribut.type;
-        if (attribut.type.contains("<")) {
-            typeDeLAttribut = StringUtils.substringBetween(typeDeLAttribut, "<", ">");
+    protected boolean estUnImportAPrendreEnCompte(String unImport) {
+        boolean estAPrendreEnCompte = true;
+        if (estUnTypeJavaDeBase(unImport)) {
+            estAPrendreEnCompte = false;
         }
-        if (!typeDeLAttribut.startsWith("fr.pe")) {
+        else if (estUnTypeExterne(unImport)) {
+            estAPrendreEnCompte = false;
+        }
+        return estAPrendreEnCompte;
+    }
+
+    protected boolean estUnTypeExterne(UnAttribut attribut) {
+        return estUnTypeExterne(attribut.type);
+    }
+
+    protected boolean estUnTypeExterne(String unType) {
+        boolean estUnTypeExterne = false;
+        if (unType.contains("<")) {
+            unType = StringUtils.substringBetween(unType, "<", ">");
+        }
+        if (!unType.startsWith("fr.pe")) {
             estUnTypeExterne = true;
         }
         return estUnTypeExterne;
     }
 
     protected boolean estUnTypeJavaDeBase(UnAttribut attribut) {
+        return estUnTypeJavaDeBase(attribut.type);
+    }
+
+    protected boolean estUnTypeJavaDeBase(String unType) {
         List<String> listeDesTypesJavaDeBase = new ArrayList<String>();
         listeDesTypesJavaDeBase.add("boolean");
         listeDesTypesJavaDeBase.add("byte");
@@ -41,7 +59,7 @@ public abstract class GenerateurDeDiagrammeAbstrait implements GenerateurDeDiagr
         listeDesTypesJavaDeBase.add("long");
         listeDesTypesJavaDeBase.add("short");
 
-        return listeDesTypesJavaDeBase.contains(attribut.type);
+        return listeDesTypesJavaDeBase.contains(unType);
     }
 
 }

@@ -10,6 +10,7 @@ public class UneClasse {
 
     public final Collection<UneMethode> listeDesMethodes = new ArrayList<>();
     public final Collection<UnAttribut> listeDesAttributs = new ArrayList<>();
+    public final Collection<String> listeDesImports = new ArrayList<>();
 
     public UneClasse(String nomDuPackage, String nomDeLaClasse) {
         this.nomDuPackage = nomDuPackage;
