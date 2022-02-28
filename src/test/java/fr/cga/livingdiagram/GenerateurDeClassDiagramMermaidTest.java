@@ -14,7 +14,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     public void doitGenererUnDiagrammePourUneSeuleClasse() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_01_classe_simple");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "classDiagram\n" +
                 "class Episode\n";
 
@@ -26,7 +26,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     public void doitGenererUnDiagrammePourDeuxClasses() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_02_plusieurs_classes_simples");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "classDiagram\n" +
                 "class Episode\n" +
                 "class Revue\n";
@@ -39,7 +39,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     public void doitGenererLesAttributsPourUneClasse() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_06_une_classe_avec_des_attributs");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "classDiagram\n" +
                 "class Episode\n" +
                 "Episode : java.lang.String heros\n" +
@@ -54,7 +54,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Test
     public void doitGenererLesAttributsEtLesMethodesPourUneClasse() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_03_une_classe_complete");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "classDiagram\n" +
                 "class Episode\n" +
                 "Episode : java.lang.String heros\n" +
@@ -73,7 +73,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Disabled
     public void doitGenererLesCadresPourChaquePackage() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_04_affichage_des_packages");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
         String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();
@@ -85,7 +85,7 @@ public class GenerateurDeClassDiagramMermaidTest {
     @Disabled
     public void doitGenererLesDependancesEntreLesClasses() throws Exception {
         Collection<UneClasse> listeDesClassesTrouvees = assistant.fabriqueLaCollectionDesClassesSources("_05_dependances_inter_packages");
-        GenerateurDeDiagramme generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
+        GenerateurDeDiagrammeInterface generateur = new GenerateurDeClassDiagramMermaid(listeDesClassesTrouvees);
         String diagrammeAttendu = "";
 
         String diagramme = generateur.genereLeDiagrammePourLaListeDesClasses();

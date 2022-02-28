@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GenerateurDeDiagrammeAbstrait implements GenerateurDeDiagramme {
+public abstract class GenerateurDeDiagrammeAbstrait implements GenerateurDeDiagrammeInterface {
 
     protected boolean estUnAttributAPrendreEnCompte(UnAttribut attribut) {
         boolean estAPrendreEnCompte = true;

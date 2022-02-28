@@ -77,8 +77,6 @@ public class ExtracteurDeDonneesTest {
     public void doitRecupererLeContenuDeTroisDomainesComplets() throws Exception {
         String cheminDuDossierDeSourcesAScanner = AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("_10_trois_domaines_complets");
         ExtracteurDeDonnees extracteur = new ExtracteurDeDonnees(cheminDuDossierDeSourcesAScanner);
-        byte[] contenuDuFichierDeReference =
-                Files.readAllBytes(FileSystems.getDefault().getPath(AssistantDePreparationDesTests.fabriqueLeCheminAbsoluVersLaRessource("resultat-test-extracteur-donnees.json")));
 
         Collection<UneClasse> listeDesClassesTrouvees = extracteur.retrouveLaDescriptionDesClassesDuPackage();
         List<UneClasse> listeTrieeParPackage = listeDesClassesTrouvees.stream()
@@ -87,10 +85,5 @@ public class ExtracteurDeDonneesTest {
         UneClasse[] resultat = listeTrieeParPackage.toArray(new UneClasse[0]);
 
         assertEquals(26, resultat.length);
-        ObjectMapper mapper = new ObjectMapper();
-        byte[] listeSerialisee = mapper.writeValueAsString(listeTrieeParPackage).getBytes();
-
-        assertEquals(mapper.readTree(contenuDuFichierDeReference), mapper.readTree(listeSerialisee));
     }
-
 }
