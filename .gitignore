@@ -4,3 +4,4 @@ target
 .settings
 # fichiers spécifique au ms001
 src/test/resources/_11_ms001_offres
+.vscode
